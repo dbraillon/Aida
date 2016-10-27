@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration.Install;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Aida.WindowsServices
 {
-    public partial class Service1 : ServiceBase
+    public partial class UpdateService : ServiceBase
     {
-        public Service1()
+        public UpdateService()
         {
             InitializeComponent();
         }

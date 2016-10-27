@@ -13,7 +13,7 @@ namespace Aida.ConsoleApplication
         static void Main(string[] args)
         {
             Voice voice = new Voice(CultureInfo.CurrentCulture);
-            voice.Say("Hello, I'm glad to see you back!");
+            voice.Say("Bonjour ! Contente de vous revoir !");
         }
     }
 }

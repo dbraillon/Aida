@@ -1,6 +1,6 @@
 ﻿namespace Aida.WindowsServices
 {
-    partial class Service1
+    partial class UpdateService
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            // 
+            // UpdateService
+            // 
+            this.ServiceName = "Aida.UpdateService";
+
         }
 
         #endregion
