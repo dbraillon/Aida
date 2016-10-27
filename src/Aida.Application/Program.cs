@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aida.ConsoleApplication
+namespace Aida.Application
 {
-    public class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            Voice voice = new Voice(CultureInfo.CurrentCulture);
-            voice.Say("Bonjour ! Contente de vous revoir !");
+            Voice v = new Voice(CultureInfo.CurrentCulture);
+            v.Say("Hello! I'm glad to see you back!");
         }
     }
 }

@@ -72,6 +72,12 @@
       <DependentUpon>UpdateService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aida.Core\Aida.Core.csproj">
+      <Project>{14d8815e-32ff-4b98-b46f-db6ef78c84be}</Project>
+      <Name>Aida.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
