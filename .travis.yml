@@ -1,5 +1,5 @@
 language: csharp
-solution: src/Roggle.sln
+solution: src/Aida.sln
 deploy:
   provider: releases
   api_key:
