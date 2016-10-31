@@ -41,7 +41,10 @@ namespace Aida.WindowsServices
 
         protected override void OnStop()
         {
+            ApplicationProcess?.StandardInput.WriteLine("exit");
+            ApplicationProcess?.WaitForExit();
             IsRunning = false;
+            ServiceThread.Interrupt();
             ServiceThread.Join();
         }
 
@@ -71,10 +74,12 @@ namespace Aida.WindowsServices
                         webClient.DownloadFile(url, zipFile);
 
                         ApplicationProcess?.StandardInput.WriteLine("exit");
+                        ApplicationProcess?.WaitForExit();
 
                         Directory.Delete(ApplicationDirectory.FullName, true);
                         Directory.CreateDirectory(ApplicationDirectory.FullName);
                         ZipFile.ExtractToDirectory(zipFile, ApplicationDirectory.FullName);
+                        File.Delete(zipFile);
                     }
 
                     if (File.Exists(applicationFilePath)) ApplicationProcess = Process.Start(applicationFilePath);
