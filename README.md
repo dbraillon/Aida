@@ -1,4 +1,4 @@
 # Aida
 Aida is a personnal assistant
 
-[https://ci.appveyor.com/api/projects/status/github/aida?svg=true](https://ci.appveyor.com/api/projects/status/github/aida?svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/9476q6ea2tcneaqb/branch/master?svg=true)](https://ci.appveyor.com/project/dbraillon/aida/branch/master)
