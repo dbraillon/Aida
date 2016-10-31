@@ -9,4 +9,4 @@ platform: Any CPU
 configuration: Release
 
 build:
-  project: src/Aida.Core/Aida.Core.csproj # path to Visual Studio solution or project
+  project: src/Aida.Application/Aida.Application.csproj # path to Visual Studio solution or project
