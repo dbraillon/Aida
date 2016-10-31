@@ -18,4 +18,4 @@ build:
 artifacts:
   # pushing entire folder as a zip archive
   - path: src/Aida.Application/bin/Release
-  
+  name: last-release
