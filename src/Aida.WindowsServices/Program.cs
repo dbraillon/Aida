@@ -25,6 +25,7 @@ namespace Aida.WindowsServices
             {
                 if (args.FirstOrDefault() == "-i") Install();
                 if (args.FirstOrDefault() == "-u") Uninstall();
+                if (args.FirstOrDefault() == "-d") Debug();
             }
             else
             {
@@ -40,7 +41,7 @@ namespace Aida.WindowsServices
             // Start services if necessary
             foreach (var service in Services)
             {
-                ServiceController serviceController = new ServiceController(new UpdateService().ServiceName);
+                ServiceController serviceController = new ServiceController(service.ServiceName);
                 serviceController.Start();
             }
         }
@@ -50,7 +51,7 @@ namespace Aida.WindowsServices
             // Stop services if necessary
             foreach (var service in Services)
             {
-                ServiceController serviceController = new ServiceController(new UpdateService().ServiceName);
+                ServiceController serviceController = new ServiceController(service.ServiceName);
                 if (serviceController.Status != ServiceControllerStatus.Stopped)
                 {
                     serviceController.Stop();
@@ -59,6 +60,11 @@ namespace Aida.WindowsServices
             
             // Start installutil.exe to uninstall services
             ManagedInstallerClass.InstallHelper(new string[] { "/u", Assembly.GetExecutingAssembly().Location });
+        }
+
+        static void Debug()
+        {
+            new UpdateService().DebugStart();
         }
     }
 }
