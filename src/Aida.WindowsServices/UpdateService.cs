@@ -33,7 +33,7 @@ namespace Aida.WindowsServices
 
         protected override void OnStart(string[] args)
         {
-            ApplicationDirectory = Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Application"));
+            ApplicationDirectory = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Aida", "Application"));
             IsRunning = true;
             ServiceThread = new Thread(Loop);
             ServiceThread.Start();
@@ -69,7 +69,7 @@ namespace Aida.WindowsServices
 
                     if (lastVersion.CompareTo(currentVersion) > 0)
                     {
-                        var url = lastVersion.Assets.First().BrowserDownloadUrl;
+                        var url = lastVersion.Assets.First(a => a.Name == "release.zip").BrowserDownloadUrl;
                         var zipFile = Path.Combine(ApplicationDirectory.Parent.FullName, "release.zip");
                         webClient.DownloadFile(url, zipFile);
 
