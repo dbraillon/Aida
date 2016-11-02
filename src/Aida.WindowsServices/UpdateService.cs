@@ -33,7 +33,18 @@ namespace Aida.WindowsServices
 
         protected override void OnStart(string[] args)
         {
-            ApplicationDirectory = Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Aida", "Application"));
+            ApplicationDirectory = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "Aida"));
+            ApplicationProcess = new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    CreateNoWindow = true,
+                    FileName = Path.Combine(ApplicationDirectory.FullName, "Aida.exe"),
+                    RedirectStandardInput = true,
+                    UseShellExecute = false
+                }
+            };
+
             IsRunning = true;
             ServiceThread = new Thread(Loop);
             ServiceThread.Start();
@@ -51,7 +62,7 @@ namespace Aida.WindowsServices
         protected void Loop()
         {
             var applicationFilePath = Path.Combine(ApplicationDirectory.FullName, "Aida.exe");
-            if (File.Exists(applicationFilePath)) ApplicationProcess = Process.Start(applicationFilePath);
+            if (File.Exists(applicationFilePath)) ApplicationProcess.Start();
 
             while (IsRunning)
             {
@@ -70,19 +81,24 @@ namespace Aida.WindowsServices
                     if (lastVersion.CompareTo(currentVersion) > 0)
                     {
                         var url = lastVersion.Assets.First(a => a.Name == "release.zip").BrowserDownloadUrl;
-                        var zipFile = Path.Combine(ApplicationDirectory.Parent.FullName, "release.zip");
+                        var zipFile = Path.Combine(ApplicationDirectory.FullName, "release.zip");
+
+                        if (File.Exists(zipFile)) File.Delete(zipFile);
                         webClient.DownloadFile(url, zipFile);
 
                         ApplicationProcess?.StandardInput.WriteLine("exit");
                         ApplicationProcess?.WaitForExit();
 
-                        Directory.Delete(ApplicationDirectory.FullName, true);
-                        Directory.CreateDirectory(ApplicationDirectory.FullName);
+                        //Directory.Delete(ApplicationDirectory.FullName, true);
+                        //Directory.CreateDirectory(ApplicationDirectory.FullName);
+                        foreach (var file in Directory.EnumerateFiles(ApplicationDirectory.FullName))
+                            if (Path.GetFileName(file) != "release.zip")
+                                File.Delete(file);
                         ZipFile.ExtractToDirectory(zipFile, ApplicationDirectory.FullName);
                         File.Delete(zipFile);
                     }
 
-                    if (File.Exists(applicationFilePath)) ApplicationProcess = Process.Start(applicationFilePath);
+                    if (File.Exists(applicationFilePath)) ApplicationProcess.Start();
                 }
 
                 // Wait one hour

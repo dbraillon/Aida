@@ -21,26 +21,44 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0A125419952F4FEBDD4A946B7E3DFA2D"
+        "OwnerKey" = "8:_0CA4ACE092BC479D85A205B2D4BE5FAD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0CA4ACE092BC479D85A205B2D4BE5FAD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_137C916C227148BB8DC20F6A37D41F69"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_280A267FCC75270B0140B90328903149"
-        "OwnerKey" = "8:_137C916C227148BB8DC20F6A37D41F69"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3B6D38D9AD68B8F4E12ECC18AA66C0DA"
-        "OwnerKey" = "8:_137C916C227148BB8DC20F6A37D41F69"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_648B6122FAA816D1668186CFC7FA41AA"
         "OwnerKey" = "8:_F3E01EC0D86E4ACBD9F42C81D5E70B57"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A08096FDC72611905E465826EC2D15B9"
+        "OwnerKey" = "8:_137C916C227148BB8DC20F6A37D41F69"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C34C706CF88BFFA48D0AEDB7EFCD45F5"
+        "OwnerKey" = "8:_137C916C227148BB8DC20F6A37D41F69"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C34C706CF88BFFA48D0AEDB7EFCD45F5"
+        "OwnerKey" = "8:_0CA4ACE092BC479D85A205B2D4BE5FAD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,13 +76,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_3B6D38D9AD68B8F4E12ECC18AA66C0DA"
+        "OwnerKey" = "8:_0CA4ACE092BC479D85A205B2D4BE5FAD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_280A267FCC75270B0140B90328903149"
+        "OwnerKey" = "8:_A08096FDC72611905E465826EC2D15B9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C34C706CF88BFFA48D0AEDB7EFCD45F5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -110,6 +134,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -134,6 +166,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -223,20 +263,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_280A267FCC75270B0140B90328903149"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_648B6122FAA816D1668186CFC7FA41AA"
             {
             "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Aida.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_280A267FCC75270B0140B90328903149"
+                    "_648B6122FAA816D1668186CFC7FA41AA"
                     {
-                    "Name" = "8:Aida.Core.dll"
+                    "Name" = "8:System.IO.Compression.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Aida.Core.dll"
+            "SourcePath" = "8:System.IO.Compression.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_77B40CFA07CC4C47A27BE50283805B09"
@@ -254,14 +294,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3B6D38D9AD68B8F4E12ECC18AA66C0DA"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A08096FDC72611905E465826EC2D15B9"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_3B6D38D9AD68B8F4E12ECC18AA66C0DA"
+                    "_A08096FDC72611905E465826EC2D15B9"
                     {
                     "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
@@ -285,23 +325,23 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_648B6122FAA816D1668186CFC7FA41AA"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C34C706CF88BFFA48D0AEDB7EFCD45F5"
             {
             "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:TRUE"
-            "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Aida.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_648B6122FAA816D1668186CFC7FA41AA"
+                    "_C34C706CF88BFFA48D0AEDB7EFCD45F5"
                     {
-                    "Name" = "8:System.IO.Compression.dll"
+                    "Name" = "8:Aida.Core.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:System.IO.Compression.dll"
+            "SourcePath" = "8:Aida.Core.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_77B40CFA07CC4C47A27BE50283805B09"
+            "Folder" = "8:_F2758EE70DCF48E8B2C7B99C26FA5080"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -353,6 +393,28 @@
         }
         "Folder"
         {
+            "{1525181F-901A-416C-8A58-119130FE478E}:_1786E7D8B81E412E83B000AF7692B527"
+            {
+            "Name" = "8:#1910"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:CommonFilesFolder"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_F2758EE70DCF48E8B2C7B99C26FA5080"
+                    {
+                    "Name" = "8:Aida"
+                    "AlwaysCreate" = "11:TRUE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_0E81FFC47F594581BAF4C06ECFA9DD13"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_3DA3EE2A02794688A38BED28E5DCE2C6"
             {
             "Name" = "8:#1916"
@@ -404,7 +466,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Aida"
         "ProductCode" = "8:{F182133A-6FFD-4345-80E1-3D1EBE39F797}"
-        "PackageCode" = "8:{04EE9A59-C396-4CAF-9D82-B0D323766265}"
+        "PackageCode" = "8:{17C009E6-14BC-4FF1-ACF2-8DECADB013A0}"
         "UpgradeCode" = "8:{F0BB37A1-847F-4BB4-8533-6E1BEEAA7C9E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -923,6 +985,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_0CA4ACE092BC479D85A205B2D4BE5FAD"
+            {
+            "SourcePath" = "8:..\\Aida.Application\\obj\\Debug\\Aida.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_F2758EE70DCF48E8B2C7B99C26FA5080"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{E44A5B2B-8FD5-42E5-945F-4C0C83F19B67}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_137C916C227148BB8DC20F6A37D41F69"
             {
             "SourcePath" = "8:..\\Aida.WindowsServices\\obj\\Debug\\Aida.WindowsServices.exe"
