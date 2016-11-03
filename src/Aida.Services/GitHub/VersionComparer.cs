@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Aida.WindowsServices.GitHub
+namespace Aida.Services.GitHub
 {
     public class VersionComparer : IComparer<string>
     {

@@ -4,10 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
 
-namespace Aida.WindowsServices
+namespace Aida.Services
 {
     static class Program
     {
+        /// <summary>
+        /// Contains all services this program defines.
+        /// </summary>
         static ServiceBase[] Services
         {
             get
@@ -64,6 +67,7 @@ namespace Aida.WindowsServices
 
         static void Debug()
         {
+            // Start services in debug mode
             new UpdateService().DebugStart();
         }
     }

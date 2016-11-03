@@ -6,7 +6,7 @@ using System.Configuration.Install;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Aida.WindowsServices
+namespace Aida.Services
 {
     [RunInstaller(true)]
     public partial class ProjectInstaller : System.Configuration.Install.Installer

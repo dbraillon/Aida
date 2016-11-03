@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aida.Core", "Aida.Core\Aida.Core.csproj", "{14D8815E-32FF-4B98-B46F-DB6EF78C84BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aida.WindowsServices", "Aida.WindowsServices\Aida.WindowsServices.csproj", "{8FF5B212-CE42-4CF0-BEF3-83ED69F2341C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aida.Services", "Aida.Services\Aida.Services.csproj", "{8FF5B212-CE42-4CF0-BEF3-83ED69F2341C}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Aida.SetupWizard", "Aida.SetupWizard\Aida.SetupWizard.vdproj", "{A016E7DE-C8FB-43AC-AACC-EA17C783186B}"
 EndProject

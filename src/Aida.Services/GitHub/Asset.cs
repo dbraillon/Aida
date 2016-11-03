@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Aida.WindowsServices.GitHub
+namespace Aida.Services.GitHub
 {
     public class Asset
     {

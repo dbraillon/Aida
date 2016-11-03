@@ -1,4 +1,4 @@
-﻿namespace Aida.WindowsServices
+﻿namespace Aida.Services
 {
     partial class ProjectInstaller
     {

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Aida")]
 [assembly: AssemblyDescription("Aida is a personnal assistant")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Davy Braillon")]
+[assembly: AssemblyCompany("DBR")]
 [assembly: AssemblyProduct("Aida")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]

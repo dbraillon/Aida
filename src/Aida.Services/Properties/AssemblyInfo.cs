@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Aida.WindowsServices")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Aida.Services")]
+[assembly: AssemblyDescription("Aida services keep Aida updated and running")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Davy Braillon")]
-[assembly: AssemblyProduct("Aida.WindowsServices")]
+[assembly: AssemblyCompany("DBR")]
+[assembly: AssemblyProduct("Aida.Services")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

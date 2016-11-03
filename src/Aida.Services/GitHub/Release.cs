@@ -2,10 +2,22 @@
 using System.Collections.Generic;
 using System;
 
-namespace Aida.WindowsServices.GitHub
+namespace Aida.Services.GitHub
 {
     public class Release : IComparable<Release>
     {
+        public static Release Default
+        {
+            get
+            {
+                return new Release()
+                {
+                    TagName = "Default",
+                    Name = "0.0.0.0"
+                };
+            }
+        }
+
         [JsonProperty("id")]
         public int Id { get; set; }
 
