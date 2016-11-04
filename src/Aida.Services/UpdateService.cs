@@ -1,5 +1,6 @@
 ﻿using Aida.Services.GitHub;
 using Newtonsoft.Json;
+using Roggle.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,9 +17,11 @@ namespace Aida.Services
     public partial class UpdateService : ServiceBase
     {
         public const string ApplicationProcessName = "Aida";
+        public const string ApplicationFileName = "Aida.exe";
         public const string ApplicationExitCommand = "exit";
         public const int ApplicationExitWaitTime = 30000;
         public const string ApplicationCheckUpdateUrl = "https://api.github.com/repos/dbraillon/aida/releases";
+        public const string ApplicationReleaseFileName = "release.zip";
 
         /// <summary>
         /// Directory where the main application is stored.
@@ -94,37 +97,51 @@ namespace Aida.Services
         {
             while (IsRunning)
             {
-                var lastRelease = GetLastRelease();
-
-                using (var webClient = new WebClient())
+                try
                 {
-                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
-                    
+                    GRoggle.Write("Start checking if Aida is up to date", RoggleLogLevel.Debug);
+
+                    var applicationFilePath = Path.Combine(ApplicationDirectory.FullName, ApplicationFileName);
+
+                    var lastReleaseVersion = GetLastReleaseVersion();
                     var currentVersion = File.Exists(applicationFilePath) ? FileVersionInfo.GetVersionInfo(applicationFilePath).ProductVersion : "0.0.0.0";
 
-                    if (lastVersion.CompareTo(currentVersion) > 0)
+                    GRoggle.Write($"Aida version is {currentVersion}, server version is {lastReleaseVersion.Name}", RoggleLogLevel.Debug);
+
+                    if (lastReleaseVersion.CompareTo(currentVersion) > 0)
                     {
-                        var url = lastVersion.Assets.First(a => a.Name == "release.zip").BrowserDownloadUrl;
-                        var zipFile = Path.Combine(ApplicationDirectory.FullName, "release.zip");
+                        GRoggle.Write("Aida needs an update, downloading last version", RoggleLogLevel.Debug);
 
-                        if (File.Exists(zipFile)) File.Delete(zipFile);
-                        webClient.DownloadFile(url, zipFile);
+                        var releaseZipFile = DownloadRelease(lastReleaseVersion);
 
-                        ApplicationProcess?.StandardInput.WriteLine("exit");
-                        ApplicationProcess?.WaitForExit();
+                        if (releaseZipFile != null)
+                        {
+                            GRoggle.Write("Download last version succeed, updating", RoggleLogLevel.Debug);
 
-                        //Directory.Delete(ApplicationDirectory.FullName, true);
-                        //Directory.CreateDirectory(ApplicationDirectory.FullName);
-                        foreach (var file in Directory.EnumerateFiles(ApplicationDirectory.FullName))
-                            if (Path.GetFileName(file) != "release.zip")
-                                File.Delete(file);
-                        ZipFile.ExtractToDirectory(zipFile, ApplicationDirectory.FullName);
-                        File.Delete(zipFile);
+                            StopApplicationProcess();
+
+                            ClearApplicationDirectory();
+                            ExtractRelease(releaseZipFile);
+
+                            StartApplicationProcess();
+
+                            GRoggle.Write("Aida has successfuly been updated", RoggleLogLevel.Debug);
+                        }
+                        else
+                        {
+                            GRoggle.Write("Download last version failed, skip update", RoggleLogLevel.Debug);
+                        }
                     }
-
-                    if (File.Exists(applicationFilePath)) ApplicationProcess.Start();
+                    else
+                    {
+                        GRoggle.Write("Aida is up to date, skip update", RoggleLogLevel.Debug);
+                    }
                 }
-
+                catch (Exception e)
+                {
+                    GRoggle.Write("An unhandled error occurs", e);
+                }
+                
                 // Wait one hour
                 Thread.Sleep(1000 * 60 * 60);
             }
@@ -284,7 +301,7 @@ namespace Aida.Services
         /// Get last version from GitHub releases.
         /// </summary>
         /// <returns>The last version of main application.</returns>
-        protected Release GetLastRelease()
+        protected Release GetLastReleaseVersion()
         {
             try
             {
@@ -310,6 +327,102 @@ namespace Aida.Services
                 // TODO: Log
 
                 return Release.Default;
+            }
+        }
+
+        /// <summary>
+        /// Download last version from GitHub releases.
+        /// </summary>
+        /// <param name="release">A release to download.</param>
+        /// <param name="filePath">A path where to store downloaded zip file.</param>
+        protected FileInfo DownloadRelease(Release release)
+        {
+            try
+            {
+                using (var webClient = new WebClient())
+                {
+                    webClient.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+                    // Try to find the release zip file
+                    var releaseAsset = release.Assets.FirstOrDefault(a => a.Name.ToLower() == ApplicationReleaseFileName.ToLower());
+                    if (releaseAsset != null)
+                    {
+                        var url = releaseAsset.BrowserDownloadUrl;
+                        var zipFilePath = Path.Combine(ApplicationDirectory.FullName, ApplicationReleaseFileName);
+
+                        // Delete the file if it already exists
+                        if (File.Exists(zipFilePath)) File.Delete(zipFilePath);
+
+                        // Download the release zip file
+                        webClient.DownloadFile(url, zipFilePath);
+
+                        return new FileInfo(zipFilePath);
+                    }
+                    else
+                    {
+                        // TODO: Log
+                    }
+                }
+            }
+            catch (WebException e)
+            {
+                // TODO: Log
+            }
+            catch (IOException e)
+            {
+                // TODO: Log
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                // TODO: Log
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Remove every file inside application directory.
+        /// </summary>
+        protected void ClearApplicationDirectory()
+        {
+            try
+            {
+                foreach (var file in ApplicationDirectory.EnumerateFiles())
+                {
+                    if (file.Name != ApplicationReleaseFileName)
+                    {
+                        file.Delete();
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                // TODO: Log
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                // TODO: Log
+            }
+        }
+
+        /// <summary>
+        /// Extract zip release file to application directory.
+        /// </summary>
+        /// <param name="releaseFile">A zip release file.</param>
+        protected void ExtractRelease(FileInfo releaseFile)
+        {
+            try
+            {
+                ZipFile.ExtractToDirectory(releaseFile.FullName, ApplicationDirectory.FullName);
+                File.Delete(releaseFile.FullName);
+            }
+            catch (IOException e)
+            {
+                // TODO: Log
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                // TODO: Log
             }
         }
     }

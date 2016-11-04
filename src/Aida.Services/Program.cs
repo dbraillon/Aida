@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Roggle.Core;
+using System;
 using System.Configuration.Install;
 using System.Linq;
 using System.Reflection;
@@ -38,6 +39,14 @@ namespace Aida.Services
 
         static void Install()
         {
+            // Create Roggle log
+            GRoggle.Use(
+                new EventLogRoggle(
+                    eventSourceName: "Aida.Services", eventLogName: "Aida", 
+                    acceptedLogLevels: RoggleLogLevel.Debug | RoggleLogLevel.Error | RoggleLogLevel.Info | RoggleLogLevel.Warning
+                )
+            );
+
             // Start installutil.exe to install services
             ManagedInstallerClass.InstallHelper(new string[] { Assembly.GetExecutingAssembly().Location });
 
