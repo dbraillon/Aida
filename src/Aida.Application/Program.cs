@@ -1,54 +1,49 @@
 ﻿using Aida.Core;
+using Aida.Core.Voices.French;
+using Roggle.Core;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using static Aida.Core.Constants;
 
 namespace Aida.Application
 {
     class Program
     {
-        static Thread ApplicationThread { get; set; }
-        static volatile bool IsRunning;
+        static AidaCore CoreThread { get; set; }
 
         static void Main(string[] args)
         {
-            IsRunning = true;
-            ApplicationThread = new Thread(Loop);
-            ApplicationThread.Start();
+#if Release
+            // Initialize log system
+            GRoggle.Use(
+                new EventLogRoggle(
+                    eventSourceName: AidaApplicationSourceName, eventLogName: AidaLogName,
+                    acceptedLogLevels: RoggleLogLevel.Debug | RoggleLogLevel.Error | RoggleLogLevel.Info | RoggleLogLevel.Warning
+                )
+            );
+#endif
+
+            // Start main application thread
+            CoreThread = new AidaCore(
+                voice: new FrenchFemaleVoice()
+            );
+            CoreThread.Start();
             
-            while (IsRunning)
+            // Set this thread idle, waiting for user input
+            while (CoreThread.IsRunning)
             {
                 var userInput = Console.ReadLine();
 
                 switch (userInput)
                 {
                     case "exit":
-                        IsRunning = false;
+                        CoreThread.Stop();
                         break;
 
                     default:
+                        CoreThread.Write(userInput);
                         break;
                 }
             }
-
-            ApplicationThread.Join();
-        }
-
-        static void Loop()
-        {
-            Voice v = new Voice(CultureInfo.CurrentCulture);
-            v.Say("Hello! I'm glad to see you back!");
-
-            while (IsRunning)
-            {
-                Thread.Sleep(1000);
-            }
-
-            v.Say("Goodbye!");
         }
     }
 }

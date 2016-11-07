@@ -11,6 +11,10 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Aida.SetupWizard", "Aida.Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aida.Application", "Aida.Application\Aida.Application.csproj", "{E44A5B2B-8FD5-42E5-945F-4C0C83F19B67}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{393515BD-AF7E-4743-9DB6-3AB009A83819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aida.Voices.Windows", "Modules\Aida.Voices.Windows\Aida.Voices.Windows.csproj", "{AC30433C-4B29-4A09-8084-C5379C6C537D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,8 +35,15 @@ Global
 		{E44A5B2B-8FD5-42E5-945F-4C0C83F19B67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E44A5B2B-8FD5-42E5-945F-4C0C83F19B67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E44A5B2B-8FD5-42E5-945F-4C0C83F19B67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC30433C-4B29-4A09-8084-C5379C6C537D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC30433C-4B29-4A09-8084-C5379C6C537D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC30433C-4B29-4A09-8084-C5379C6C537D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC30433C-4B29-4A09-8084-C5379C6C537D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC30433C-4B29-4A09-8084-C5379C6C537D} = {393515BD-AF7E-4743-9DB6-3AB009A83819}
 	EndGlobalSection
 EndGlobal

@@ -4,6 +4,7 @@ using System.Configuration.Install;
 using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
+using static Aida.Core.Constants;
 
 namespace Aida.Services
 {
@@ -33,6 +34,13 @@ namespace Aida.Services
             }
             else
             {
+                GRoggle.Use(
+                    new EventLogRoggle(
+                        eventSourceName: AidaServiceSourceName, eventLogName: AidaLogName,
+                        acceptedLogLevels: RoggleLogLevel.Debug | RoggleLogLevel.Error | RoggleLogLevel.Info | RoggleLogLevel.Warning
+                    )
+                );
+
                 ServiceBase.Run(Services);
             }
         }
@@ -41,10 +49,8 @@ namespace Aida.Services
         {
             // Create Roggle log
             GRoggle.Use(
-                new EventLogRoggle(
-                    eventSourceName: "Aida.Services", eventLogName: "Aida", 
-                    acceptedLogLevels: RoggleLogLevel.Debug | RoggleLogLevel.Error | RoggleLogLevel.Info | RoggleLogLevel.Warning
-                )
+                new EventLogRoggle(eventSourceName: AidaServiceSourceName, eventLogName: AidaLogName),
+                new EventLogRoggle(eventSourceName: AidaApplicationSourceName, eventLogName: AidaLogName)
             );
 
             // Start installutil.exe to install services

@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Roggle.Core, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Roggle.2.0.2\lib\Roggle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,11 +52,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aida.Core\Aida.Core.csproj">
       <Project>{14d8815e-32ff-4b98-b46f-db6ef78c84be}</Project>
       <Name>Aida.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\Aida.Voices.Windows\Aida.Voices.Windows.csproj">
+      <Project>{ac30433c-4b29-4a09-8084-c5379c6c537d}</Project>
+      <Name>Aida.Voices.Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
