@@ -8,7 +8,7 @@ namespace Aida.Application
 {
     class Program
     {
-        static AidaCore CoreThread { get; set; }
+        static AidaCore Aida { get; set; }
 
         static void Main(string[] args)
         {
@@ -23,24 +23,24 @@ namespace Aida.Application
 #endif
 
             // Start main application thread
-            CoreThread = new AidaCore(
+            Aida = new AidaCore(
                 voice: new FrenchFemaleVoice()
             );
-            CoreThread.Start();
+            Aida.Start();
             
             // Set this thread idle, waiting for user input
-            while (CoreThread.IsRunning)
+            while (Aida.IsRunning)
             {
                 var userInput = Console.ReadLine();
 
                 switch (userInput)
                 {
                     case "exit":
-                        CoreThread.Stop();
+                        Aida.Stop();
                         break;
 
                     default:
-                        CoreThread.Write(userInput);
+                        Aida.Write(userInput);
                         break;
                 }
             }

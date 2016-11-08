@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{14D8815E-32FF-4B98-B46F-DB6EF78C84BE}</ProjectGuid>
+    <ProjectGuid>{AC30433C-4B29-4A09-8084-C5379C6C537D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aida.Core</RootNamespace>
-    <AssemblyName>Aida.Core</AssemblyName>
+    <RootNamespace>Aida.Voices.Windows</RootNamespace>
+    <AssemblyName>Aida.Voices.Windows</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,13 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\Constants.cs" />
-    <Compile Include="AidaCore.cs" />
-    <Compile Include="Infrastructure\IAction.cs" />
-    <Compile Include="Infrastructure\IIngredient.cs" />
-    <Compile Include="Infrastructure\ITrigger.cs" />
-    <Compile Include="Infrastructure\IVoice.cs" />
+    <Compile Include="Aida\VoiceAction.cs" />
+    <Compile Include="Aida\VoiceIngredient.cs" />
+    <Compile Include="Voices\French\FrenchFemaleVoice.cs" />
+    <Compile Include="Voices\French\FrenchVoice.cs" />
+    <Compile Include="Voices\French\FrenchMaleVoice.cs" />
+    <Compile Include="WindowsVoice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Aida.Core\Aida.Core.csproj">
+      <Project>{14d8815e-32ff-4b98-b46f-db6ef78c84be}</Project>
+      <Name>Aida.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

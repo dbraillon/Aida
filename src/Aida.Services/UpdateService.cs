@@ -50,6 +50,18 @@ namespace Aida.Services
             // Get application directory
             ApplicationDirectory = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "Aida"));
 
+            // Create application process
+            ApplicationProcess = new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    CreateNoWindow = true,
+                    FileName = Path.Combine(ApplicationDirectory.FullName, "Aida.exe"),
+                    RedirectStandardInput = true,
+                    UseShellExecute = false
+                }
+            };
+
             // Create service thread
             ServiceThread = new Thread(Loop);
         }
@@ -154,20 +166,11 @@ namespace Aida.Services
         {
             GRoggle.Write("Try starting Aida process", RoggleLogLevel.Debug);
 
-            TryAttachProcessIfNecessary();
-
             if (ApplicationProcess != null)
             {
-                if (ApplicationProcess.)
-                {
-                    ApplicationProcess.Start();
+                ApplicationProcess.Start();
 
-                    GRoggle.Write("Aida process started successfuly", RoggleLogLevel.Debug);
-                }
-                else
-                {
-                    GRoggle.Write("There is already an Aida process started", RoggleLogLevel.Debug);
-                }
+                GRoggle.Write("Aida process started successfuly", RoggleLogLevel.Debug);
             }
             else
             {
@@ -181,8 +184,6 @@ namespace Aida.Services
         protected void StopApplicationProcess()
         {
             GRoggle.Write("Try stopping Aida process", RoggleLogLevel.Debug);
-
-            TryAttachProcessIfNecessary();
 
             if (ApplicationProcess != null)
             {
@@ -200,82 +201,6 @@ namespace Aida.Services
             else
             {
                 GRoggle.Write("There is no Aida process to stop", RoggleLogLevel.Debug);
-            }
-        }
-
-        /// <summary>
-        /// Try to attach an Aida process to current process.
-        /// </summary>
-        protected void TryAttachProcessIfNecessary()
-        {
-            GRoggle.Write("Try attaching an existing Aida process", RoggleLogLevel.Debug);
-
-            if (ApplicationProcess == null)
-            {
-                // Get all Aida processes
-                var processes = Process.GetProcessesByName(ApplicationProcessName);
-
-                GRoggle.Write($"There is {processes.Length} Aida processes running", RoggleLogLevel.Debug);
-
-                if (processes.Length > 0)
-                {
-                    // If there is at least 1 process running, attach it
-                    ApplicationProcess = processes.First();
-                    GRoggle.Write($"Process with ID {ApplicationProcess.Id} has been attached", RoggleLogLevel.Debug);
-
-                    // And kill the other
-                    StopConcurrentProcess();
-                }
-                else
-                {
-                    // If there is no process running, build the new process
-                    ApplicationProcess = new Process()
-                    {
-                        StartInfo = new ProcessStartInfo()
-                        {
-                            CreateNoWindow = true,
-                            FileName = Path.Combine(ApplicationDirectory.FullName, "Aida.exe"),
-                            RedirectStandardInput = true,
-                            UseShellExecute = false
-                        }
-                    };
-
-                    GRoggle.Write("There is no Aida process running, create one", RoggleLogLevel.Debug);
-                }
-            }
-            else
-            {
-                GRoggle.Write("There is already an Application process attached", RoggleLogLevel.Debug);
-            }
-        }
-
-        /// <summary>
-        /// Try to stop all other Aida instance.
-        /// </summary>
-        protected void StopConcurrentProcess()
-        {
-            GRoggle.Write("Try to stop concurrent Aida process", RoggleLogLevel.Debug);
-
-            // Get all Aida processes
-            var processes = Process.GetProcessesByName(ApplicationProcessName);
-            
-            GRoggle.Write($"There are {processes.Length} Aida process running", RoggleLogLevel.Debug);
-
-            // Loop on each
-            foreach (var process in processes)
-            {
-                // Do not stop current process
-                if ((ApplicationProcess != null && process.Id != ApplicationProcess.Id) ||
-                    ApplicationProcess == null)
-                {
-                    GRoggle.Write($"Stop process with ID {process.Id}", RoggleLogLevel.Debug);
-
-                    StopProcess(process);
-                }
-                else
-                {
-                    GRoggle.Write($"Do not stop current Aida process {process.Id}", RoggleLogLevel.Debug);
-                }
             }
         }
 
@@ -302,13 +227,13 @@ namespace Aida.Services
                     throw new ApplicationException($"Process does not stop in specified time ({ApplicationExitWaitTime} ms).");
                 }
             }
-            catch (InvalidOperationException e)
-            {
-                GRoggle.Write("Something goes wrong while stopping Aida process", e);
-            }
             catch (ApplicationException e)
             {
                 GRoggle.Write(e);
+            }
+            catch (Exception e)
+            {
+                GRoggle.Write("Something goes wrong while stopping Aida process", e);
             }
             finally
             {
@@ -352,7 +277,7 @@ namespace Aida.Services
                     return releasesVersions.First();
                 }
             }
-            catch (WebException e)
+            catch (Exception e)
             {
                 GRoggle.Write("Something goes wrong while getting last release version", e);
 
@@ -396,15 +321,7 @@ namespace Aida.Services
                     }
                 }
             }
-            catch (WebException e)
-            {
-                GRoggle.Write("Something goes wrong while downloading last release", e);
-            }
-            catch (IOException e)
-            {
-                GRoggle.Write("Something goes wrong while downloading last release", e);
-            }
-            catch (UnauthorizedAccessException e)
+            catch (Exception e)
             {
                 GRoggle.Write("Something goes wrong while downloading last release", e);
             }
@@ -431,11 +348,7 @@ namespace Aida.Services
                     }
                 }
             }
-            catch (IOException e)
-            {
-                GRoggle.Write("Something goes wrong while clearing application directory", e);
-            }
-            catch (UnauthorizedAccessException e)
+            catch (Exception e)
             {
                 GRoggle.Write("Something goes wrong while clearing application directory", e);
             }
@@ -454,11 +367,7 @@ namespace Aida.Services
                 ZipFile.ExtractToDirectory(releaseFile.FullName, ApplicationDirectory.FullName);
                 File.Delete(releaseFile.FullName);
             }
-            catch (IOException e)
-            {
-                GRoggle.Write("Something goes wrong while extracting release", e);
-            }
-            catch (UnauthorizedAccessException e)
+            catch (Exception e)
             {
                 GRoggle.Write("Something goes wrong while extracting release", e);
             }
