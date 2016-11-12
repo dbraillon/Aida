@@ -29,6 +29,11 @@ namespace Aida.Services
         protected DirectoryInfo ApplicationDirectory { get; set; }
 
         /// <summary>
+        /// Executable file of the main application.
+        /// </summary>
+        protected FileInfo ApplicationFile { get; set; }
+
+        /// <summary>
         /// Process of the main application.
         /// </summary>
         protected Process ApplicationProcess { get; set; }
@@ -48,7 +53,8 @@ namespace Aida.Services
             InitializeComponent();
 
             // Get application directory
-            ApplicationDirectory = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), "Aida"));
+            ApplicationDirectory = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles), ApplicationProcessName));
+            ApplicationFile = new FileInfo(Path.Combine(ApplicationDirectory.FullName, ApplicationFileName));
 
             // Create application process
             ApplicationProcess = new Process()
@@ -56,7 +62,7 @@ namespace Aida.Services
                 StartInfo = new ProcessStartInfo()
                 {
                     CreateNoWindow = true,
-                    FileName = Path.Combine(ApplicationDirectory.FullName, "Aida.exe"),
+                    FileName = ApplicationFile.FullName,
                     RedirectStandardInput = true,
                     UseShellExecute = false
                 }
@@ -166,7 +172,7 @@ namespace Aida.Services
         {
             GRoggle.Write("Try starting Aida process", RoggleLogLevel.Debug);
 
-            if (ApplicationProcess != null)
+            if (ApplicationProcess != null && ApplicationFile.Exists)
             {
                 ApplicationProcess.Start();
 
@@ -185,7 +191,7 @@ namespace Aida.Services
         {
             GRoggle.Write("Try stopping Aida process", RoggleLogLevel.Debug);
 
-            if (ApplicationProcess != null)
+            if (ApplicationProcess != null && ApplicationFile.Exists)
             {
                 if (!ApplicationProcess.HasExited)
                 {
@@ -366,6 +372,7 @@ namespace Aida.Services
 
                 ZipFile.ExtractToDirectory(releaseFile.FullName, ApplicationDirectory.FullName);
                 File.Delete(releaseFile.FullName);
+                ApplicationFile.Refresh();
             }
             catch (Exception e)
             {
