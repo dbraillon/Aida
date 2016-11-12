@@ -47,6 +47,12 @@
     <Compile Include="Infrastructure\ITrigger.cs" />
     <Compile Include="Infrastructure\IVoice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Console\ConsoleAction.cs" />
+    <Compile Include="Services\Console\ConsoleIngredient.cs" />
+    <Compile Include="Services\Console\ConsoleTrigger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Triggers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

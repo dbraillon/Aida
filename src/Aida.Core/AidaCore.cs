@@ -15,7 +15,7 @@ namespace Aida.Core
 
             Voice = voice;
         }
-
+        
         public void Start()
         {
             IsRunning = true;
