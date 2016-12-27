@@ -44,8 +44,14 @@
     <Compile Include="AidaCore.cs" />
     <Compile Include="Infrastructure\IAction.cs" />
     <Compile Include="Infrastructure\IIngredient.cs" />
-    <Compile Include="Infrastructure\ITrigger.cs" />
+    <Compile Include="Infrastructure\Ingredients\Ingredient.cs" />
+    <Compile Include="Infrastructure\Ingredients\IngredientValue.cs" />
+    <Compile Include="Infrastructure\Triggers\ITriggerService.cs" />
+    <Compile Include="Infrastructure\Triggers\ITrigger.cs" />
     <Compile Include="Infrastructure\IVoice.cs" />
+    <Compile Include="Infrastructure\Triggers\TriggerServices.cs" />
+    <Compile Include="Infrastructure\Triggers\Trigger.cs" />
+    <Compile Include="Infrastructure\Triggers\TriggerMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
